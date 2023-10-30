@@ -1,0 +1,45 @@
+version: 0.2
+
+
+env:
+  parameter-store:
+      DOCKER_USERNAME: "/kpapp/mydockerusername"
+      DOCKER_PASSWORD: "/kpapp/mydockerupassword"
+      DOCKER_URL: "/kpapp/url"
+phases:
+  install:
+    runtime-versions:
+       python : 3.11
+     
+  pre_build:
+  
+    commands:
+       - pip install -r requirements.txt
+  build:
+    commands:
+      - echo "build docker image here"
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin "$DOCKER_URL"
+       - docker build -t "$DOCKER_URL/$DOCKER_USERNAME/simple-python-flask-app:latest" .
+       - docker push "docker.io/$DOCKER_USERNAME/simple-python-flask-app:latest"
+  post_build:
+    commands:
+       - echo "this is done"
+  
+#reports:
+  #report-name-or-arn:
+    #files:
+      # - location
+      # - location
+    #base-directory: location
+    #discard-paths: yes
+    #file-format: JunitXml | CucumberJson
+#artifacts:
+  #files:
+    # - location
+    # - location
+  #name: $(date +%Y-%m-%d)
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths
