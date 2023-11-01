@@ -3,9 +3,9 @@ this is the demo of the aws ci / cd pipline. ia m kp
 
 
 
-in ec2 run this script --- 
+# in ec2 run this script --- 
 #!/bin/bash 
-# This installs the CodeDeploy agent and its prerequisites on Ubuntu 22.04.  
+-- This installs the CodeDeploy agent and its prerequisites on Ubuntu 22.04.  --
 sudo apt-get update 
 sudo apt-get install ruby-full ruby-webrick wget -y 
 cd /tmp 
